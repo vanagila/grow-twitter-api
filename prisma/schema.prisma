@@ -1,0 +1,52 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       String @id @default(uuid()) @db.Uuid
+  name     String @db.VarChar(100)
+  username String @unique @db.VarChar(15)
+  email    String @unique @db.VarChar
+  password String @db.Text
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("update_at")
+
+  Tweet Tweet[]
+  Like  Like[]
+
+  @@map("user")
+}
+
+model Tweet {
+  id      String @id @default(uuid()) @db.Uuid
+  content String @db.VarChar(280)
+  type    String @db.Char(1)
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("update_at")
+
+  userId String @map("user_id") @db.Uuid
+  user   User   @relation(fields: [userId], references: [id])
+
+  Like Like[]
+
+  @@map("tweet")
+}
+
+model Like {
+  id String @id @default(uuid()) @db.Uuid
+
+  userId String @map("user_id") @db.Uuid
+  user   User   @relation(fields: [userId], references: [id])
+
+  tweetId String @map("tweet_id") @db.Uuid
+  tweet   Tweet  @relation(fields: [tweetId], references: [id])
+
+  @@map("like")
+}
