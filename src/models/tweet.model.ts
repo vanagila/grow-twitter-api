@@ -1,11 +1,8 @@
-import { Like } from "./like.model";
-
 export class Tweet {
   constructor(
     private _id: string,
     private _content: string,
-    private _type: string,
-    private _like: Like
+    private _type: string
   ) {}
 
   public get id(): string {
@@ -20,15 +17,11 @@ export class Tweet {
     return this._type;
   }
 
-  public get like(): Like {
-    return this._like;
-  }
   public toJson() {
     return {
       id: this.id,
       content: this.content,
       type: this._type,
-      like: this._like,
     };
   }
 }
