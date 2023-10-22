@@ -23,4 +23,22 @@ export class UserController {
       });
     }
   }
+
+  public async login(req: Request, res: Response) {
+    try {
+      const { username, password } = req.body;
+
+      const service = new UserService();
+
+      const response = await service.login({ username, password });
+
+      return res.status(response.code).json(response);
+    } catch (error: any) {
+      return res.status(500).json({
+        code: 500,
+        ok: false,
+        mensage: error.toString(),
+      });
+    }
+  }
 }

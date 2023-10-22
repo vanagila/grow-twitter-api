@@ -1,6 +1,7 @@
 import { User as UserPrisma } from "@prisma/client";
+import { randomUUID } from "crypto";
 import { repository } from "../database/prisma.connection";
-import { ResponseDTO, UserRegisterDTO } from "../dtos";
+import { ResponseDTO, UserLoginDTO, UserRegisterDTO } from "../dtos";
 import { User } from "../models";
 
 export class UserService {
@@ -31,6 +32,32 @@ export class UserService {
       ok: true,
       mensage: "Usuario cadastrado",
       data: this.mapToModel({ ...newUser }),
+    };
+  }
+
+  public async login(bodyData: UserLoginDTO): Promise<ResponseDTO> {
+    const userFound = await repository.user.findUnique({
+      where: {
+        username: bodyData.username,
+        password: bodyData.password,
+      },
+    });
+
+    if (!userFound) {
+      return {
+        code: 401,
+        ok: false,
+        mensage: "Dados invalidos",
+      };
+    }
+
+    const token = randomUUID();
+
+    return {
+      code: 200,
+      ok: true,
+      mensage: "Login feito com sucesso",
+      data: { token },
     };
   }
 
