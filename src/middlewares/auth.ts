@@ -9,7 +9,7 @@ export class Auth {
       return res.status(401).json({
         code: 401,
         ok: false,
-        mensage: "Token obrigatorio",
+        message: "Token obrigatorio",
       });
     }
 
@@ -21,7 +21,7 @@ export class Auth {
       return res.status(401).json({
         code: 401,
         ok: false,
-        mensage: "Token invalido",
+        message: "Token invalido",
       });
     }
 

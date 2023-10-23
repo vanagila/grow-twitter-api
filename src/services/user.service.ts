@@ -14,7 +14,7 @@ export class UserService {
       return {
         code: 400,
         ok: false,
-        mensage: "E-mail ja cadastrado",
+        message: "E-mail ja cadastrado",
       };
     }
 
@@ -30,7 +30,7 @@ export class UserService {
     return {
       code: 201,
       ok: true,
-      mensage: "Usuario cadastrado",
+      message: "Usuario cadastrado",
       data: this.mapToModel({ ...newUser }),
     };
   }
@@ -47,7 +47,7 @@ export class UserService {
       return {
         code: 401,
         ok: false,
-        mensage: "Dados invalidos",
+        message: "Dados invalidos",
       };
     }
 
@@ -61,7 +61,7 @@ export class UserService {
     return {
       code: 200,
       ok: true,
-      mensage: "Login feito com sucesso",
+      message: "Login feito com sucesso",
       data: { token },
     };
   }

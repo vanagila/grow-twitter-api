@@ -7,21 +7,21 @@ export class Register {
     if (!name || !username || !email || !password) {
       return res.status(400).json({
         ok: false,
-        mensage: "Todos os campos devem ser preenchidos",
+        message: "Todos os campos devem ser preenchidos",
       });
     }
 
     if (!email.includes("@") || !email.includes(".com")) {
       return res.status(400).json({
         ok: false,
-        mensage: "E-mail inválido",
+        message: "E-mail inválido",
       });
     }
 
     if (password.length < 8) {
       return res.status(400).json({
         ok: false,
-        mensage: "Senha deve ver pelo menos 8 caracteres",
+        message: "Senha deve ver pelo menos 8 caracteres",
       });
     }
 

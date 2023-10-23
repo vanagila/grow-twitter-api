@@ -8,7 +8,7 @@ export class TweetType {
       return res.status(400).json({
         code: 400,
         ok: false,
-        mensage: "Tweet deve ser do tipo 'T'(tweet) ou 'R'(retweet)",
+        message: "Tweet deve ser do tipo 'T'(tweet) ou 'R'(retweet)",
       });
     }
   }
