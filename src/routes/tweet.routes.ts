@@ -1,9 +1,19 @@
 import { Router } from "express";
+import { TweetController } from "../controllers";
+import { Auth, TweetData, TweetType } from "../middlewares";
 
 export const tweetRoutes = () => {
   const router = Router();
+  const controller = new TweetController();
+  const auth = new Auth();
+  const type = new TweetType();
+  const data = new TweetData();
 
-  router.post("/");
+  router.post(
+    "/",
+    [auth.validate, data.validate, type.validate],
+    controller.postTweet
+  );
 
   return router;
 };

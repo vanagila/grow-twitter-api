@@ -53,12 +53,27 @@ export class UserService {
 
     const token = randomUUID();
 
+    await repository.user.update({
+      where: { id: userFound.id },
+      data: { authToken: token },
+    });
+
     return {
       code: 200,
       ok: true,
       mensage: "Login feito com sucesso",
       data: { token },
     };
+  }
+
+  public async validateToken(token: string): Promise<string | null> {
+    const userFound = await repository.user.findFirst({
+      where: { authToken: token },
+    });
+
+    if (!userFound) return null;
+
+    return userFound.id;
   }
 
   private mapToModel(userDB: UserPrisma): User {
