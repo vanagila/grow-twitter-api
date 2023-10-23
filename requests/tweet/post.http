@@ -1,0 +1,8 @@
+POST http://localhost:8080/tweets HTTP/1.1
+content-type: application/json
+Authorization: d395a26e-35bb-4dc4-a563-5671c1ed963b
+
+{
+  "content": "",
+  "type": "T"
+}
