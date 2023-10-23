@@ -16,7 +16,7 @@ export class TweetService {
     return {
       code: 201,
       ok: true,
-      mensage: "Tweet postado",
+      message: "Tweet postado",
       data: this.mapToModel(newTweet),
     };
   }

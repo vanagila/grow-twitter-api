@@ -19,7 +19,7 @@ export class TweetController {
       return res.status(500).json({
         code: 500,
         ok: false,
-        mensage: error.toString(),
+        message: error.toString(),
       });
     }
   }

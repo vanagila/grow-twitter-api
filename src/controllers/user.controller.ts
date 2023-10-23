@@ -19,7 +19,7 @@ export class UserController {
       return res.status(500).json({
         code: 500,
         ok: false,
-        mensage: error.toString(),
+        message: error.toString(),
       });
     }
   }
@@ -37,7 +37,7 @@ export class UserController {
       return res.status(500).json({
         code: 500,
         ok: false,
-        mensage: error.toString(),
+        message: error.toString(),
       });
     }
   }

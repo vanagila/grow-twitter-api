@@ -1,6 +1,6 @@
 export interface ResponseDTO {
   code: number;
   ok: boolean;
-  mensage: string;
+  message: string;
   data?: any;
 }
