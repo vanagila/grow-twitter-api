@@ -21,6 +21,29 @@ export class TweetService {
     };
   }
 
+  public async listTweets(user: string | undefined): Promise<ResponseDTO> {
+    const tweets = await repository.tweet.findMany({
+      where: {
+        userId: user,
+      },
+    });
+
+    if (!tweets.length) {
+      return {
+        code: 404,
+        ok: false,
+        message: "Tweets nao encontrado",
+      };
+    }
+
+    return {
+      code: 200,
+      ok: true,
+      message: "Tweets listados com sucesso",
+      data: tweets.map((t) => this.mapToModel(t)),
+    };
+  }
+
   private mapToModel(tweet: TweetPrisma): Tweet {
     return new Tweet(tweet.id, tweet.content, tweet.type);
   }

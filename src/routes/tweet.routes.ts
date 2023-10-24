@@ -12,8 +12,10 @@ export const tweetRoutes = () => {
   router.post(
     "/",
     [auth.validate, data.validate, type.validate],
-    controller.postTweet
+    controller.postTweets
   );
+
+  router.get("/", auth.validate, controller.getTweets);
 
   return router;
 };
