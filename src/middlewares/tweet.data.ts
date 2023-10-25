@@ -8,7 +8,7 @@ export class TweetData {
       return res.status(400).json({
         code: 400,
         ok: false,
-        mensage: "Tweet sem conteudo",
+        message: "Tweet sem conteudo",
       });
     }
     return next();

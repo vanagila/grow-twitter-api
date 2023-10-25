@@ -16,8 +16,31 @@ export class TweetService {
     return {
       code: 201,
       ok: true,
-      mensage: "Tweet postado",
+      message: "Tweet postado",
       data: this.mapToModel(newTweet),
+    };
+  }
+
+  public async listTweets(user: string | undefined): Promise<ResponseDTO> {
+    const tweets = await repository.tweet.findMany({
+      where: {
+        userId: user,
+      },
+    });
+
+    if (!tweets.length) {
+      return {
+        code: 404,
+        ok: false,
+        message: "Tweets nao encontrado",
+      };
+    }
+
+    return {
+      code: 200,
+      ok: true,
+      message: "Tweets listados com sucesso",
+      data: tweets.map((t) => this.mapToModel(t)),
     };
   }
 
