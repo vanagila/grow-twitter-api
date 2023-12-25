@@ -1,5 +1,7 @@
 import { NextFunction, Request, Response } from "express";
-import { UserService } from "../services";
+import { JsonWebTokenError } from "jsonwebtoken";
+import { JWTAdapter } from "../adapters";
+import { envs } from "../envs";
 
 export class Auth {
   public async validate(req: Request, res: Response, next: NextFunction) {
@@ -13,20 +15,35 @@ export class Auth {
       });
     }
 
-    const service = new UserService();
+    try {
+      const jwt = new JWTAdapter(envs.JWT_SECRET_KEY, envs.JWT_SECRET_KEY);
+      const userAuth = jwt.decodeToken(token);
 
-    const userAuthenticated = await service.validateToken(token);
+      if (!userAuth) {
+        return res.status(401).json({
+          code: 401,
+          ok: false,
+          message: "Token invalido",
+        });
+      }
 
-    if (!userAuthenticated) {
-      return res.status(401).json({
-        code: 401,
+      req.body.userId = userAuth.id;
+
+      return next();
+    } catch (error: any) {
+      if (error instanceof JsonWebTokenError) {
+        return res.status(401).json({
+          code: 401,
+          ok: false,
+          message: "Token invalido",
+        });
+      }
+
+      return {
+        code: 500,
         ok: false,
-        message: "Token invalido",
-      });
+        message: "Problema com o servidor",
+      };
     }
-
-    req.body.userId = userAuthenticated;
-
-    return next();
   }
 }
