@@ -1,3 +1,3 @@
 GET http://localhost:8080/tweets HTTP/1.1
 content-type: application/json
-Authorization: 
+Authorization: 3059819f-9ab8-431a-b751-056e573edad4
