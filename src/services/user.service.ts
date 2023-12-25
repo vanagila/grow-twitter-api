@@ -1,7 +1,8 @@
 import { User as UserPrisma } from "@prisma/client";
-import { randomUUID } from "crypto";
+import { BcryptAdapter } from "../adapters";
 import { repository } from "../database/prisma.connection";
-import { ResponseDTO, UserLoginDTO, UserRegisterDTO } from "../dtos";
+import { ResponseDTO, UserRegisterDTO } from "../dtos";
+import { envs } from "../envs";
 import { User } from "../models";
 
 export class UserService {
@@ -18,12 +19,15 @@ export class UserService {
       };
     }
 
+    const bcrypt = new BcryptAdapter(Number(envs.BCRYPT_SALT));
+    const hash = await bcrypt.generateHash(bodyData.password);
+
     const newUser = await repository.user.create({
       data: {
         name: bodyData.name,
         username: bodyData.username,
         email: bodyData.email,
-        password: bodyData.password,
+        password: hash,
       },
     });
 
@@ -33,47 +37,6 @@ export class UserService {
       message: "Usuario cadastrado",
       data: this.mapToModel({ ...newUser }),
     };
-  }
-
-  public async login(bodyData: UserLoginDTO): Promise<ResponseDTO> {
-    const userFound = await repository.user.findUnique({
-      where: {
-        username: bodyData.username,
-        password: bodyData.password,
-      },
-    });
-
-    if (!userFound) {
-      return {
-        code: 401,
-        ok: false,
-        message: "Dados invalidos",
-      };
-    }
-
-    const token = randomUUID();
-
-    await repository.user.update({
-      where: { id: userFound.id },
-      data: { authToken: token },
-    });
-
-    return {
-      code: 200,
-      ok: true,
-      message: "Login feito com sucesso",
-      data: { token },
-    };
-  }
-
-  public async validateToken(token: string): Promise<string | null> {
-    const userFound = await repository.user.findFirst({
-      where: { authToken: token },
-    });
-
-    if (!userFound) return null;
-
-    return userFound.id;
   }
 
   private mapToModel(userDB: UserPrisma): User {

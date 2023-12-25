@@ -21,7 +21,7 @@ export class Tweet {
     return {
       id: this.id,
       content: this.content,
-      type: this._type,
+      type: this.type,
     };
   }
 }
