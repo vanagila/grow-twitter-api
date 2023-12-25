@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { UserService } from "../services";
+import { AuthService } from "../services/auth.service";
 
 export class UserController {
   public async register(req: Request, res: Response) {
@@ -28,9 +29,9 @@ export class UserController {
     try {
       const { username, password } = req.body;
 
-      const service = new UserService();
+      const auth = new AuthService();
 
-      const response = await service.login({ username, password });
+      const response = await auth.login({ username, password });
 
       return res.status(response.code).json(response);
     } catch (error: any) {
