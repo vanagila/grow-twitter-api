@@ -1,8 +1,8 @@
 POST http://localhost:8080/tweets HTTP/1.1
 content-type: application/json
-Authorization:
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgwYzgwOTgyLWI5NmItNDMxZi1hYzcwLTA0Y2MyMDEzNWU2ZiIsIm5hbWUiOiJuaW5hIiwidXNlcm5hbWUiOiJuaW5pbmhhIiwiZW1haWwiOiJuaW5pbmhhQGVtYWlsLmNvbSIsInBhc3N3b3JkIjoiMTIzIiwiYXV0aFRva2VuIjoiNWQ0YmQxOGMtOWVlOC00Zjg1LTlkZmQtYWFiOWM0M2MzMmFjIiwiY3JlYXRlZEF0IjoiMjAyMy0xMC0yMVQwNTowOTo0OC41NThaIiwidXBkYXRlZEF0IjoiMjAyMy0xMi0yNVQwMjoxOToxNS41NzZaIiwiaWF0IjoxNzAzNTMzNjYxLCJleHAiOjE3MDM1MzcyNjF9.Og76hFIiTBXXoj8MoMjHmqTcr1z1cNubkKWyiMG3CWU
 
 {
-  "content": "Meu primeiro tweet",
-  "type": "T"
+  "content":"outro tweet com RT",
+  "type": "R"
 }
