@@ -18,8 +18,10 @@ model User {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("update_at")
 
-  Tweet Tweet[]
-  Like  Like[]
+  Tweet    Tweet[]
+  Like     Like[]
+  Follower Follower[]
+  Reply    Reply[]
 
   @@map("user")
 }
@@ -35,7 +37,8 @@ model Tweet {
   userId String @map("user_id") @db.Uuid
   user   User   @relation(fields: [userId], references: [id])
 
-  Like Like[]
+  Like  Like[]
+  Reply Reply[]
 
   @@map("tweet")
 }
@@ -50,4 +53,29 @@ model Like {
   tweet   Tweet  @relation(fields: [tweetId], references: [id])
 
   @@map("like")
+}
+
+model Follower {
+  id String @id @default(uuid()) @db.Uuid
+
+  userId String @map("user_id") @db.Uuid
+  user   User   @relation(fields: [userId], references: [id])
+
+  @@map("follower")
+}
+
+model Reply {
+  id      String @id @default(uuid()) @db.Uuid
+  content String @db.VarChar(280)
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("update_at")
+
+  userId String @map("user_id") @db.Uuid
+  user   User   @relation(fields: [userId], references: [id])
+
+  tweetId String @map("tweet_id") @db.Uuid
+  tweet   Tweet  @relation(fields: [tweetId], references: [id])
+
+  @@map("reply")
 }
