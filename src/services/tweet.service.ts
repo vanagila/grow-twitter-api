@@ -32,7 +32,7 @@ export class TweetService {
       return {
         code: 404,
         ok: false,
-        message: "Tweets nao encontrado",
+        message: "Tweets nao encontrados",
       };
     }
 

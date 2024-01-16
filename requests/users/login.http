@@ -1,7 +1,7 @@
 POST http://localhost:8080/users/login HTTP/1.1
 content-Type: application/json
 
-{
-  "username": "nininha",
-  "password": "nina123"
-}
+# {
+#   "username": "nininha",
+#   "password": "nina1234"
+# }

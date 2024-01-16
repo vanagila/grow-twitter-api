@@ -1,9 +1,5 @@
-export class Tweet {
-  constructor(
-    private _id: string,
-    private _content: string,
-    private _type: string
-  ) {}
+export class Reply {
+  constructor(private _id: string, private _content: string) {}
 
   public get id(): string {
     return this._id;
@@ -13,15 +9,10 @@ export class Tweet {
     return this._content;
   }
 
-  public get type(): string {
-    return this._type;
-  }
-
   public toJSON() {
     return {
       id: this.id,
       content: this.content,
-      type: this.type,
     };
   }
 }

@@ -1,0 +1,8 @@
+POST http://localhost:8080/replies HTTP/1.1
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYTdhOGViLThmNTItNGY5Ni05MjEzLTdlN2E3YzdjOTFhNCIsInVzZXJuYW1lIjoidmFuYWdpbGEiLCJlbWFpbCI6InZhbmFnaWxhQG1haWwuY29tIiwiaWF0IjoxNzA1MzY3NTcwLCJleHAiOjE3MDUzNzExNzB9.BchR7ymgII4ehWqyzg-r3Yp5GeMOUiqwHYKnAIpDw9U
+
+{
+  "content":"resposta do tweet",
+  "tweetId": "190c3394-28ba-4d06-94fd-3b08f53005f9"
+}
