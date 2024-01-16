@@ -33,14 +33,19 @@ export class AuthService {
       };
     }
 
+    const payloadToken = {
+      id: userFound.id,
+      username: userFound.username,
+      email: userFound.email,
+    };
     const jwt = new JWTAdapter(envs.JWT_SECRET_KEY, envs.JWT_EXPIRE_IN);
-    const token = jwt.generateToken(userFound);
+    const token = jwt.generateToken(payloadToken);
 
     return {
       code: 200,
       ok: true,
       message: "Login feito com sucesso",
-      data: { token },
+      data: { token, user: payloadToken },
     };
   }
 }

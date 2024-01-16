@@ -5,7 +5,7 @@ export class Like {
     return this._id;
   }
 
-  public toJson() {
+  public toJSON() {
     this._id;
   }
 }

@@ -1,18 +1,18 @@
 import { Request, Response } from "express";
-import { TweetService } from "../services/tweet.service";
+import { ReplyService } from "../services/reply.service";
 
-export class TweetController {
-  public async postTweets(req: Request, res: Response) {
+export class ReplyController {
+  public async postReplies(req: Request, res: Response) {
     try {
-      const { content, type } = req.body;
+      const { content, tweetId } = req.body;
 
       const { id } = req.authorizedUser;
 
-      const service = new TweetService();
+      const service = new ReplyService();
 
-      const response = await service.createTweet({
+      const response = await service.createReply({
         content,
-        type,
+        tweetId,
         userId: id,
       });
 
@@ -26,13 +26,13 @@ export class TweetController {
     }
   }
 
-  public async getTweets(req: Request, res: Response) {
+  public async getReplies(req: Request, res: Response) {
     try {
-      const { username } = req.authorizedUser;
+      const { tweetId } = req.params;
 
-      const service = new TweetService();
+      const service = new ReplyService();
 
-      const response = await service.listTweets(username as string | undefined);
+      const response = await service.listReplies(tweetId);
 
       return res.status(response.code).json(response);
     } catch (error: any) {

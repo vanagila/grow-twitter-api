@@ -4,11 +4,11 @@ import { LikeService } from "../services";
 export class LikeController {
   public async like(req: Request, res: Response) {
     try {
-      const { userId } = req.body;
+      const { id } = req.authorizedUser;
       const { tweetId } = req.params;
 
       const service = new LikeService();
-      const response = await service.likeTweet({ userId, tweetId });
+      const response = await service.likeTweet({ userId: id, tweetId });
 
       return res.status(response.code).json(response);
     } catch (error: any) {
