@@ -6,6 +6,14 @@ import { Reply } from "../models";
 export class ReplyService {
   public async createReply(bodyData: ReplyPostDTO): Promise<ResponseDTO> {
     //criar if para validar se o tweetId existe
+    if (bodyData.tweetId === undefined) {
+      return {
+        code: 404,
+        ok: false,
+        message: "Tweet nao existe",
+      };
+    }
+
     const newReply = await repository.reply.create({
       data: {
         content: bodyData.content,
