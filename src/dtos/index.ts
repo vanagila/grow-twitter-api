@@ -1,3 +1,4 @@
+export * from "./follower.dto";
 export * from "./like.delete.dto";
 export * from "./like.tweet.dto";
 export * from "./like.tweet.relation.dto";

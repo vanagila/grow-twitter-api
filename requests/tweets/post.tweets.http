@@ -1,8 +1,8 @@
 POST http://localhost:8080/tweets HTTP/1.1
 content-type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYTdhOGViLThmNTItNGY5Ni05MjEzLTdlN2E3YzdjOTFhNCIsInVzZXJuYW1lIjoidmFuYWdpbGEiLCJlbWFpbCI6InZhbmFnaWxhQG1haWwuY29tIiwiaWF0IjoxNzA1MzYxNTM0LCJleHAiOjE3MDUzNjUxMzR9.rpGhh46qYY7ENdJbRk_BGlBsR3GndVRjx5u57wcSWjw
+Authorization: Bearer 
 
 {
-  "content":"tweet dia 15",
+  "content":"",
   "type": "T"
 }

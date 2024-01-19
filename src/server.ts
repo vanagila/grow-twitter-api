@@ -2,6 +2,7 @@ import cors from "cors";
 import express from "express";
 import { envs } from "./envs";
 import { authRoutes, likeRoutes, replyRoutes, tweetRoutes } from "./routes";
+import { followerRoutes } from "./routes/follower.routes";
 
 const app = express();
 
@@ -13,6 +14,7 @@ app.use("/users", authRoutes());
 app.use("/tweets", tweetRoutes());
 app.use("/likes", likeRoutes());
 app.use("/replies", replyRoutes());
+app.use("/follower", followerRoutes());
 
 app.listen(envs.PORT, () =>
   console.log(`Servidor rodando da porta ${envs.PORT}`)
