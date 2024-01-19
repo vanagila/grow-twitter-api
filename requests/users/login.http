@@ -2,11 +2,6 @@ POST http://localhost:8080/users/login HTTP/1.1
 content-Type: application/json
 
 {
-  "username": "vanagila",
-  "password": "vanagila1234"
+  "username": "",
+  "password": ""
 }
-
-# {
-#   "username": "vanagila",
-#   "password": "vanagila1234"
-# }eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYTdhOGViLThmNTItNGY5Ni05MjEzLTdlN2E3YzdjOTFhNCIsInVzZXJuYW1lIjoidmFuYWdpbGEiLCJlbWFpbCI6InZhbmFnaWxhQG1haWwuY29tIiwiaWF0IjoxNzA1NDU2NTU2LCJleHAiOjE3MDU0NjAxNTZ9.FkeJKhp_kp2WucDNFhUvr2fQ39plXEYuZ6boM40j4Fc
