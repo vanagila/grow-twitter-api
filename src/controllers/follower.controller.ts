@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
-import { LikeService } from "../services";
+import { FollowerService } from "../services";
 
-export class LikeController {
+export class FollowerController {
   /**
-   * Handles the process of a user liking a tweet.
+   * Handles the process of a user following another user.
    *
    * @remarks
-   * This method processes requests to like a tweet.
+   * This method processes requests to follow another user.
    *
    * @param req - The expresss request
    * @param res - The expresss response
@@ -15,13 +15,16 @@ export class LikeController {
    *
    * @author Vanagila Xavier Rodrigues <vanagilakedna@gmail.com>
    */
-  public async like(req: Request, res: Response) {
+  public async follow(req: Request, res: Response) {
     try {
       const { id } = req.authorizedUser;
-      const { tweetId } = req.params;
+      const { followingId } = req.body;
 
-      const service = new LikeService();
-      const response = await service.likeTweet({ userId: id, tweetId });
+      const service = new FollowerService();
+      const response = await service.followUser({
+        userId: id,
+        followingId,
+      });
 
       return res.status(response.code).json(response);
     } catch (error: any) {
@@ -34,10 +37,10 @@ export class LikeController {
   }
 
   /**
-   * Handles the process of a user unliking a tweet.
+   * Handles the process of a user unfollowing another user.
    *
    * @remarks
-   * This method processes requests to unlike a tweet.
+   * This method processes requests to unfollow another user.
    *
    * @param req - The expresss request
    * @param res - The expresss response
@@ -46,12 +49,16 @@ export class LikeController {
    *
    * @author Vanagila Xavier Rodrigues <vanagilakedna@gmail.com>
    */
-  public async unlike(req: Request, res: Response) {
+  public async unfollow(req: Request, res: Response) {
     try {
-      const { userId, tweetId } = req.params;
+      const { id } = req.authorizedUser;
+      const { idUser } = req.params;
 
-      const service = new LikeService();
-      const response = await service.unlikeTweet({ userId, tweetId });
+      const service = new FollowerService();
+      const response = await service.unfollowUser({
+        userId: id,
+        followingId: idUser,
+      });
 
       return res.status(response.code).json(response);
     } catch (error: any) {

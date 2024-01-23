@@ -4,6 +4,18 @@ import { ResponseDTO, TweetPostDTO } from "../dtos";
 import { Tweet } from "../models";
 
 export class TweetService {
+  /**
+   * Creates a new tweet.
+   *
+   * @remarks
+   * This method uses the data provided to create a new tweet.
+   *
+   * @param bodyData - The data for the new tweet.
+
+   * @returns A promise in the REST pattern according to the applied logic.
+   *
+   * @author Vanagila Xavier Rodrigues <vanagilakedna@gmail.com>
+   */
   public async createTweet(bodyData: TweetPostDTO): Promise<ResponseDTO> {
     const newTweet = await repository.tweet.create({
       data: {
@@ -21,6 +33,18 @@ export class TweetService {
     };
   }
 
+  /**
+   * Lists tweets of a user.
+   *
+   * @remarks
+   * This method retrieves tweets associated with the provided user.If no tweets are found, it returns a 404 response. If tweets are found, it returns the tweets.
+   *
+   * @param user - The id of the user.
+
+   * @returns A promise in the REST pattern according to the applied logic.
+   *
+   * @author Vanagila Xavier Rodrigues <vanagilakedna@gmail.com>
+   */
   public async listTweets(user: string | undefined): Promise<ResponseDTO> {
     const tweets = await repository.tweet.findMany({
       where: {
@@ -32,7 +56,7 @@ export class TweetService {
       return {
         code: 404,
         ok: false,
-        message: "Tweets nao encontrado",
+        message: "Tweets nao encontrados",
       };
     }
 

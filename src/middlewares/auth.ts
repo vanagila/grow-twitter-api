@@ -16,8 +16,9 @@ export class Auth {
     }
 
     try {
-      const jwt = new JWTAdapter(envs.JWT_SECRET_KEY, envs.JWT_SECRET_KEY);
-      const userAuth = jwt.decodeToken(token);
+      const decoded = token.split(" ")[1];
+      const jwt = new JWTAdapter(envs.JWT_SECRET_KEY, envs.JWT_EXPIRE_IN);
+      const userAuth = jwt.decodeToken(decoded);
 
       if (!userAuth) {
         return res.status(401).json({
@@ -27,7 +28,7 @@ export class Auth {
         });
       }
 
-      req.body.userId = userAuth.id;
+      req.authorizedUser = userAuth;
 
       return next();
     } catch (error: any) {

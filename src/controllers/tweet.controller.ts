@@ -4,14 +4,16 @@ import { TweetService } from "../services/tweet.service";
 export class TweetController {
   public async postTweets(req: Request, res: Response) {
     try {
-      const { content, type, userId } = req.body;
+      const { content, type } = req.body;
+
+      const { id } = req.authorizedUser;
 
       const service = new TweetService();
 
       const response = await service.createTweet({
         content,
         type,
-        userId,
+        userId: id,
       });
 
       return res.status(response.code).json(response);
@@ -26,11 +28,11 @@ export class TweetController {
 
   public async getTweets(req: Request, res: Response) {
     try {
-      const { user } = req.query;
+      const { username } = req.authorizedUser;
 
       const service = new TweetService();
 
-      const response = await service.listTweets(user as string | undefined);
+      const response = await service.listTweets(username as string | undefined);
 
       return res.status(response.code).json(response);
     } catch (error: any) {
