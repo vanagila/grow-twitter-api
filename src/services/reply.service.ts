@@ -4,6 +4,18 @@ import { ReplyPostDTO, ResponseDTO } from "../dtos";
 import { Reply } from "../models";
 
 export class ReplyService {
+  /**
+   * Creates a new reply to a tweet.
+   *
+   * @remarks
+   * This method includes a check to validate if the especified tweet id exists. If the id not provided or not found, it returns a 404 response. If the validations passes, it creates a new reply.
+   *
+   * @param bodyData - The data for the new reply.
+
+   * @returns A promise in the REST pattern according to the applied logic.
+   *
+   * @author Vanagila Xavier Rodrigues <vanagilakedna@gmail.com>
+   */
   public async createReply(bodyData: ReplyPostDTO): Promise<ResponseDTO> {
     //criar if para validar se o tweetId existe
     if (bodyData.tweetId === undefined) {
@@ -30,6 +42,18 @@ export class ReplyService {
     };
   }
 
+  /**
+   * Lists the replies of a tweet.
+   *
+   * @remarks
+   * This method retrieves replies associated with the provided tweet.If no replies are found, it returns a 404 response. If replies are found, it returns the replies.
+   *
+   * @param user - The id of the tweet.
+
+   * @returns A promise in the REST pattern according to the applied logic.
+   *
+   * @author Vanagila Xavier Rodrigues <vanagilakedna@gmail.com>
+   */
   public async listReplies(tweet: string | undefined): Promise<ResponseDTO> {
     const replies = await repository.reply.findMany({
       where: {

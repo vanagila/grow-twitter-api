@@ -6,6 +6,18 @@ import { envs } from "../envs";
 import { User } from "../models";
 
 export class UserService {
+  /**
+   * Registers a new user.
+   *
+   * @remarks
+   * This method checks if the provided email is already in use. It uses bcrypt to generate a hash of the password.
+   *
+   * @param bodyData - The user data to be registered.
+
+   * @returns A promise in the REST pattern according to the applied logic
+   *
+   * @author Vanagila Xavier Rodrigues <vanagilakedna@gmail.com>
+   */
   public async register(bodyData: UserRegisterDTO): Promise<ResponseDTO> {
     const emailAlreadyinUse = await repository.user.findUnique({
       where: { email: bodyData.email },

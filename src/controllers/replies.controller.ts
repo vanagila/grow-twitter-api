@@ -2,6 +2,19 @@ import { Request, Response } from "express";
 import { ReplyService } from "../services/reply.service";
 
 export class ReplyController {
+  /**
+   * Handles the process of a user posting a reply to a tweet.
+   *
+   * @remarks
+   * This method processes requests to post a reply to a tweet.
+   *
+   * @param req - The expresss request
+   * @param res - The expresss response
+
+   * @returns A promise in the REST pattern according to the applied logic.
+   *
+   * @author Vanagila Xavier Rodrigues <vanagilakedna@gmail.com>
+   */
   public async postReplies(req: Request, res: Response) {
     try {
       const { content, tweetId } = req.body;
@@ -26,6 +39,19 @@ export class ReplyController {
     }
   }
 
+  /**
+   * Handles the process of a user posting a reply to a tweet.
+   *
+   * @remarks
+   * This method processes requests to post a reply to a tweet.
+   *
+   * @param req - The expresss request
+   * @param res - The expresss response
+
+   * @returns A promise in the REST pattern according to the applied logic.
+   *
+   * @author Vanagila Xavier Rodrigues <vanagilakedna@gmail.com>
+   */
   public async getReplies(req: Request, res: Response) {
     try {
       const { tweetId } = req.params;
