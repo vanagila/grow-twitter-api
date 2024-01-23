@@ -8,22 +8,19 @@ import {
 import { Like, Tweet } from "../models";
 
 export class LikeService {
-  public async likeTweet(bodyData: LikeTweetDTO): Promise<ResponseDTO> {
-    const tweetFound = await repository.like.findFirst({
-      where: {
-        userId: bodyData.userId,
-        tweetId: bodyData.tweetId,
-      },
-    });
+  /**
+   * Likes a tweet.
+   *
+   * @remarks
+   * This method creates a new like on the specified tweet.
+   *
+   * @param bodyData - The data for liking a tweet.
 
-    if (tweetFound) {
-      return {
-        code: 400,
-        ok: false,
-        message: "Voce ja deu like nesse tweet",
-      };
-    }
-    //nao precisa checar tweet curtido ou nao, apenas criar
+   * @returns A promise in the REST pattern according to the applied logic.
+   *
+   * @author Vanagila Xavier Rodrigues <vanagilakedna@gmail.com>
+   */
+  public async likeTweet(bodyData: LikeTweetDTO): Promise<ResponseDTO> {
     const newLike = await repository.like.create({
       data: {
         userId: bodyData.userId,
@@ -40,8 +37,20 @@ export class LikeService {
     };
   }
 
-  public async deleteLike(bodyData: DeleteLikeDTO): Promise<ResponseDTO> {
-    const likeDeleted = await repository.like.deleteMany({
+  /**
+   * Unlike a tweet.
+   *
+   * @remarks
+   * This method unlikes a specified tweet.
+   *
+   * @param bodyData - The data for unliking a tweet.
+
+   * @returns A promise in the REST pattern according to the applied logic.
+   *
+   * @author Vanagila Xavier Rodrigues <vanagilakedna@gmail.com>
+   */
+  public async unlikeTweet(bodyData: DeleteLikeDTO): Promise<ResponseDTO> {
+    await repository.like.deleteMany({
       where: {
         tweetId: bodyData.tweetId,
         userId: bodyData.userId,
