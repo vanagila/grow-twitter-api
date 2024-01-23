@@ -8,7 +8,7 @@ export const likeRoutes = () => {
   const auth = new Auth();
 
   router.post("/:tweetId", [auth.validate], controller.like);
-  router.delete("/:id", [auth.validate], controller.delete);
+  router.delete("/:id", [auth.validate], controller.unlike);
 
   return router;
 };
