@@ -1,8 +1,13 @@
 import cors from "cors";
 import express from "express";
 import { envs } from "./envs";
-import { authRoutes, likeRoutes, replyRoutes, tweetRoutes } from "./routes";
-import { followerRoutes } from "./routes/follower.routes";
+import {
+  authRoutes,
+  followerRoutes,
+  likeRoutes,
+  replyRoutes,
+  tweetRoutes,
+} from "./routes";
 
 const app = express();
 
